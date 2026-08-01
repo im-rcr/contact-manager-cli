@@ -1,0 +1,1 @@
+# Contact Manager CLI — entry point
