@@ -1,6 +1,23 @@
 # Contact Manager CLI — entry point
 
+import json
+
+CONTACTS_FILE = 'contacts.json'
+
 contacts = []
+
+def load_contacts():
+    global contacts
+    try:
+        with open(CONTACTS_FILE, "r") as file:
+            contacts = json.load(file)
+    except FileNotFoundError:
+        contacts = []
+
+def save_contacts():
+    with open(CONTACTS_FILE, "w") as file:
+        json.dump(contacts, file, indent=4)
+
 
 def show_menu():
     print("\n=== Contact Manager ===")
@@ -25,6 +42,7 @@ def add_contact():
         "email": email
     }
     contacts.append(contact)
+    save_contacts()
     print(f"Contact '{name}' added successfully!")
 
 def view_contacts():
@@ -64,6 +82,7 @@ def delete_contact():
 
     if 1 <= choice <= len(contacts):
         removed = contacts.pop(choice - 1)
+        save_contacts
         print(f"Deleted contact '{removed['name']}'.")
     else:
         print("Invalid contact number.")
@@ -88,4 +107,5 @@ def main():
             print("Invalid option. Please choose a number between 1 and 5")
 
 if __name__ == "__main__":
+    load_contacts()
     main()
