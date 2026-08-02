@@ -51,7 +51,7 @@ def view_contacts():
     else:
         print("\n=== Contacts List ===")
         for i, contact in enumerate(contacts, start=1):
-            print(f"{i}. {contact['name']} | {contact['phone']} | {contact['email']}")
+            print(f"{i}. {contact['name']:<15} | {contact['phone']:<15} | {contact['email']}")
 
 def search_contacts():
     if not contacts:
@@ -88,6 +88,9 @@ def delete_contact():
         print("Invalid contact number.")
 
 def main():
+    print("=" * 40)
+    print("     Welcome to Contact Manager CLI")
+    print("=" * 40)
     while True:
         show_menu()
         choice = input("Choose an option (1-5): ")
